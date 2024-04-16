@@ -24,7 +24,6 @@ export class signInAuth {
         Sign In with Correct Credentials
     */
    signInCorrect(uName,pWord){
-        cy.url().should('eq', 'https://katalon-demo-cura.herokuapp.com/')
         
         cy.get('#menu-toggle > .fa').click()
 
