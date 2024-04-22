@@ -23,7 +23,7 @@ export class signInAuth {
     /*
         Sign In with Correct Credentials
     */
-   signInCorrect(uName,pWord){
+   signInCorrectSession(uName,pWord){
 
         cy.session([uName,pWord], () => {
             cy.visit('/')
@@ -44,6 +44,25 @@ export class signInAuth {
             cy.contains('Logout').wait(500).should('be.visible')  
         })
           
+   }
+
+   signInCorrectwithoutSession(uName, pWord){
+        cy.visit('/')
+
+        cy.get('#menu-toggle > .fa').click()
+
+        cy.contains('Login').should('be.visible').click()
+
+        cy.url().should('include','/profile.php#login')
+
+        this.enterUserName(uName)
+        this.enterPassword(pWord)
+
+        cy.get('#btn-login').click()
+
+        cy.get('#menu-toggle > .fa').wait(500).click()
+
+        cy.contains('Logout').wait(500).should('be.visible')        
    }
 
 }

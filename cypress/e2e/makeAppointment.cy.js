@@ -20,7 +20,7 @@ describe('CURA Make an Appointment', () => {
 
     beforeEach(() => {
         cy.viewport('macbook-13')
-        signIn.signInCorrect(uName,pWord)
+        signIn.signInCorrectSession(uName,pWord)
     })
 
     context('Make an Appointment on all Facilities', () => {
@@ -60,7 +60,7 @@ describe('CURA Make an Appointment', () => {
 
     context('Hospital Readmission', () => {
 
-        it.only('Apply for Readmission', () => {
+        it('Apply for Readmission', () => {
             cy.visit('/')
             facility = 'Seoul CURA Healthcare Center'
             readmission = 1

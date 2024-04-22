@@ -11,13 +11,13 @@ describe('CURA SignIn', () => {
 
     beforeEach(() => {
         cy.viewport('macbook-13')
-        //cy.visit('https://katalon-demo-cura.herokuapp.com/')
+        cy.visit('/')
     })
 
     context('Auth Tests', () => {
 
         it('Open Sign InPage',() => {
-            //cy.url().should('eq', 'https://katalon-demo-cura.herokuapp.com/')
+            cy.url().should('eq', 'https://katalon-demo-cura.herokuapp.com/')
     
             cy.get('#menu-toggle > .fa').click()
     
@@ -75,7 +75,7 @@ describe('CURA SignIn', () => {
         it('Sign In Correctly', () => {
             uName = "John Doe"
             pWord = "ThisIsNotAPassword"
-            signIn.signInCorrect(uName, pWord)
+            signIn.signInCorrectSession(uName, pWord)
         })
     })
 })

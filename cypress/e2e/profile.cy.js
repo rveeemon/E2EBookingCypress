@@ -11,7 +11,7 @@ describe('CURA Homepage', () => {
 
     beforeEach(() => {
         cy.viewport('macbook-13')
-        cy.visit('https://katalon-demo-cura.herokuapp.com/')
+        cy.visit('/')
     })
 
     context.only('Open Profile', () => {
@@ -19,16 +19,16 @@ describe('CURA Homepage', () => {
         it('Open Profile', () => {
             uName = "John Doe"
             pWord = "ThisIsNotAPassword"
-            signIn.signInCorrect(uName, pWord)
+            signIn.signInCorrectwithoutSession(uName, pWord)
             cy.contains('Profile').click()
             cy.contains('Under construction.').should('exist')
             
         })
 
-        it.only('User must be able to log out from Profile page', () => {
+        it('User must be able to log out from Profile page', () => {
             uName = "John Doe"
             pWord = "ThisIsNotAPassword"
-            signIn.signInCorrect(uName, pWord)
+            signIn.signInCorrectwithoutSession(uName, pWord)
             cy.contains('Profile').click()
             cy.contains('Under construction.').should('exist')
             cy.get(':nth-child(3) > .btn').click()
@@ -39,14 +39,14 @@ describe('CURA Homepage', () => {
         it.only('User must be able to log in again', () => {
             uName = "John Doe"
             pWord = "ThisIsNotAPassword"
-            signIn.signInCorrect(uName, pWord)
+            signIn.signInCorrectwithoutSession(uName, pWord)
             cy.contains('Profile').click()
             cy.contains('Under construction.').should('exist')
             cy.get(':nth-child(3) > .btn').click()
             cy.get('#menu-toggle > .fa').click()
             cy.contains('Login').should('exist')
             cy.contains('Login').click()
-            signIn.signInCorrect(uName, pWord)
+            signIn.signInCorrectwithoutSession(uName, pWord)
         })
 
     })
