@@ -118,7 +118,7 @@ describe('CURA SignIn', () => {
             .should('be.visible')
         })
 
-        it.only('User must not be able to log in with empty username and password', () => {
+        it('User must not be able to log in with empty username and password', () => {
             
             cy.url().should('eq', 'https://katalon-demo-cura.herokuapp.com/')
     
