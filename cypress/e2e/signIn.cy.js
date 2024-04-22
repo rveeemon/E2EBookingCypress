@@ -11,7 +11,7 @@ describe('CURA SignIn', () => {
 
     beforeEach(() => {
         cy.viewport('macbook-13')
-        cy.visit('https://katalon-demo-cura.herokuapp.com/')
+        //cy.visit('https://katalon-demo-cura.herokuapp.com/')
     })
 
     context('Auth Tests', () => {

@@ -10,8 +10,8 @@ describe('CURA Make an Appointment', () => {
 
     Cypress.on('uncaught:exception', (err, runnable) => { return false })
 
-    var uName
-    var pWord
+    var uName = 'John Doe'
+    var pWord = 'ThisIsNotAPassword'
     var dateNow
     var facility
     var readmission
@@ -20,44 +20,38 @@ describe('CURA Make an Appointment', () => {
 
     beforeEach(() => {
         cy.viewport('macbook-13')
-        cy.visit('https://katalon-demo-cura.herokuapp.com/')
+        signIn.signInCorrect(uName,pWord)
     })
 
     context('Make an Appointment on all Facilities', () => {
         
         it('Tokyo CURA Healthcare Center', () => {
-            uName = "John Doe"
-            pWord = "ThisIsNotAPassword"
+            cy.visit('/')
             facility = 'Tokyo CURA Healthcare Center'
             readmission = 1
             hcareProgram = 'Medicaid'
             comment = 'Lorem Ipsum Dolor Sit Amet ' + facility
             dateNow = (dayjs().format('DD'))
-            signIn.signInCorrect(uName, pWord)
             cy.url('include', '#appointment')
             createAppoint.makeAppointment(facility, readmission, hcareProgram, dateNow, comment)            
         })
 
         it('Hongkong CURA Healthcare Center', () => {
-            uName = "John Doe"
-            pWord = "ThisIsNotAPassword"
+            cy.visit('/')
             facility = 'Hongkong CURA Healthcare Center'
             hcareProgram = 'Medicaid'
             comment = 'Lorem Ipsum Dolor Sit Amet ' + facility 
             dateNow = (dayjs().format('DD'))
-            signIn.signInCorrect(uName, pWord)
             cy.url('include', '#appointment')
             createAppoint.makeAppointment(facility, readmission, hcareProgram, dateNow, comment) 
         })
 
         it('Seoul CURA Healthcare Center', () => {
-            uName = "John Doe"
-            pWord = "ThisIsNotAPassword"
+            cy.visit('/')
             facility = 'Seoul CURA Healthcare Center'
             hcareProgram = 'Medicaid'
             comment = 'Lorem Ipsum Dolor Sit Amet ' + facility
             dateNow = (dayjs().format('DD'))
-            signIn.signInCorrect(uName, pWord)
             cy.url('include', '#appointment')
             createAppoint.makeAppointment(facility, readmission, hcareProgram, dateNow, comment) 
         })
@@ -66,15 +60,13 @@ describe('CURA Make an Appointment', () => {
 
     context('Hospital Readmission', () => {
 
-        it('Apply for Readmission', () => {
-            uName = "John Doe"
-            pWord = "ThisIsNotAPassword"
+        it.only('Apply for Readmission', () => {
+            cy.visit('/')
             facility = 'Seoul CURA Healthcare Center'
             readmission = 1
             hcareProgram = 'Medicaid'
             comment = 'Lorem Ipsum Dolor Sit Amet ' + facility
-            dateNow = (dayjs().format('DD'))
-            signIn.signInCorrect(uName, pWord)
+            dateNow = (dayjs().format('DD'))            
             cy.url('include', '#appointment')
             createAppoint.makeAppointment(facility, readmission, hcareProgram, dateNow, comment) 
             cy.contains('Apply for hospital readmission').should('exist')
@@ -82,14 +74,12 @@ describe('CURA Make an Appointment', () => {
         })
 
         it(`Don't apply for readmission`, () => {
-            uName = "John Doe"
-            pWord = "ThisIsNotAPassword"
+            cy.visit('/')
             facility = 'Hongkong CURA Healthcare Center'
             readmission = 0
             hcareProgram = 'Medicaid'
             comment = 'Lorem Ipsum Dolor Sit Amet ' + facility
-            dateNow = (dayjs().format('DD'))
-            signIn.signInCorrect(uName, pWord)
+            dateNow = (dayjs().format('DD'))            
             cy.url('include', '#appointment')
             createAppoint.makeAppointment(facility, readmission, hcareProgram, dateNow, comment) 
             cy.contains('Apply for hospital readmission').should('exist')
@@ -101,14 +91,12 @@ describe('CURA Make an Appointment', () => {
     context('Healthcare Program', () => {
 
         it(`Medicare`, () => {
-            uName = "John Doe"
-            pWord = "ThisIsNotAPassword"
+            cy.visit('/')
             facility = 'Hongkong CURA Healthcare Center'
             readmission = 1
             hcareProgram = 'Medicare'
             comment = 'Lorem Ipsum Dolor Sit Amet ' + hcareProgram
             dateNow = (dayjs().format('DD'))
-            signIn.signInCorrect(uName, pWord)
             cy.url('include', '#appointment')
             createAppoint.makeAppointment(facility, readmission, hcareProgram, dateNow, comment) 
             cy.contains('Apply for hospital readmission').should('exist')
@@ -116,29 +104,25 @@ describe('CURA Make an Appointment', () => {
         })
 
         it(`Medicaid`, () => {
-            uName = "John Doe"
-            pWord = "ThisIsNotAPassword"
+            cy.visit('/')
             facility = 'Hongkong CURA Healthcare Center'
             readmission = 1
             hcareProgram = 'Medicaid'
             comment = 'Lorem Ipsum Dolor Sit Amet ' + hcareProgram
             dateNow = (dayjs().format('DD'))
-            signIn.signInCorrect(uName, pWord)
             cy.url('include', '#appointment')
             createAppoint.makeAppointment(facility, readmission, hcareProgram, dateNow, comment) 
             cy.contains('Apply for hospital readmission').should('exist')
             cy.get('p[id="program"]').contains(hcareProgram)
         })
 
-        it(`None`, () => {
-            uName = "John Doe"
-            pWord = "ThisIsNotAPassword"
+        it(`Medicare`, () => {
+            cy.visit('/')
             facility = 'Hongkong CURA Healthcare Center'
             readmission = 1
-            hcareProgram = 'None'
+            hcareProgram = 'Medicare'
             comment = 'Lorem Ipsum Dolor Sit Amet ' + hcareProgram
             dateNow = (dayjs().format('DD'))
-            signIn.signInCorrect(uName, pWord)
             cy.url('include', '#appointment')
             createAppoint.makeAppointment(facility, readmission, hcareProgram, dateNow, comment) 
             cy.contains('Apply for hospital readmission').should('exist')
