@@ -78,10 +78,10 @@ describe('CURA Homepage', () => {
         /*
             User must be able to log in with correct creds
         */
-       it('User must be able to log in with correct creds', () => {
+       it.only('User must be able to log in with correct creds', () => {
            uName = "John Doe"
            pWord = "ThisIsNotAPassword"
-           signIn.signInCorrect(uName,pWord)
+           signIn.signInCorrectSession(uName,pWord)
        })
 
     })
