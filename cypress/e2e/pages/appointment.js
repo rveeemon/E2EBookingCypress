@@ -18,28 +18,33 @@ export class makeAppoint {
             cy.get('#chk_hospotal_readmission').check()
         }
         
-        cy.get('[name="programs"]').check(hcareProgram)
+        cy.get('[name="programs"]').check(hcareProgram)        
 
-        cy.get('#txt_visit_date').click()
-
-        cy.contains(dateDay).click()
-
+        if(dateDay != null) {
+            cy.get('#txt_visit_date').click()
+            cy.contains(dateDay).click()
+        }
+        
         cy.get('#txt_comment').type(comment)
 
-        cy.get('#btn-book-appointment').click()
+        cy.get('#btn-book-appointment').click()        
 
-        //Appointment confirmation and History
-        cy.contains(facility).should('exist')
+        if(dateDay != null){
+            //Appointment confirmation and History
+            cy.contains(facility).should('exist')
 
-        cy.get('#menu-toggle > .fa').click()
+            cy.get('#menu-toggle > .fa').click()
 
-        cy.contains('History').click()
+            cy.contains('History').click()
 
-        cy.contains(facility).should('exist')
+            cy.contains(facility).should('exist')
+    
+            cy.contains(hcareProgram).should('exist')
+    
+            cy.contains(comment).should('exist')
+        }
 
-        cy.contains(hcareProgram).should('exist')
-
-        cy.contains(comment).should('exist')
+        
     }
 
 }

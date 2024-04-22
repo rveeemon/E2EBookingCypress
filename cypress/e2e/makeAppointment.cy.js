@@ -130,4 +130,20 @@ describe('CURA Make an Appointment', () => {
         })
 
     })
+
+    context('Date is Empty', () => {
+
+        it('Date is empty', () => {
+            cy.visit('/')
+            facility = 'Tokyo CURA Healthcare Center'
+            readmission = 1
+            hcareProgram = 'Medicaid'
+            comment = 'Lorem Ipsum Dolor Sit Amet ' + facility
+            dateNow = null
+            cy.url('include', '#appointment')
+            createAppoint.makeAppointment(facility, readmission, hcareProgram, dateNow, comment) 
+            cy.get('input:invalid').should('have.length', 1)
+        })
+        
+    })
 })
