@@ -36,7 +36,7 @@ describe('CURA Homepage', () => {
             cy.contains('Login').should('exist')
         })
 
-        it.only('User must be able to log in again', () => {
+        it('User must be able to log in again', () => {
             uName = "John Doe"
             pWord = "ThisIsNotAPassword"
             signIn.signInCorrectwithoutSession(uName, pWord)
